@@ -1,0 +1,46 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- the above code is standard...it is available in website-->
+
+    <!-- for creating a bean we must use <bean></bean> tag -->
+    <!-- lets create bean for Alien class -->
+    <!-- in bean we must give some attributes, id= class name  class="class location-->
+    <!-- the id will decide the class name, we should enter the id value as name in getBean method-->
+
+    <!-- Alien bean-->
+    <bean id="alien" class="com.avinash.Springboot.Alien" autowire="byType">
+        <!-- we will do dependency injection in this file only-->
+        <!-- we will use property attribute for field injection-->
+        <!-- we will use constructor-arg for constructor injection-->
+
+        <!-- property -->
+        <!-- ok lets do filed injection first by property attribute-->
+        <!--it will have two attribute, name and value-->
+        <!-- name refers to the variable name and value indicate its value-->
+        <!-- this property attribute class the setter and sets the value-->
+        <!-- to work with property attribute we need setters-->
+        <!--  if the variable is a Object, then first we should include that bean object also in the xml and we will keep that value using "ref" attribute-->
+        <!--  "ref" attribute should be equal to the id of the bean of referenced object-->
+        <property name="age" value="20"> </property>
+        <property name="name" value="Avinash"> </property>
+        <!-- constructor-arg -->
+        <!--  it is used for the constructor injection -->
+        <!--  it takes two parameters, name=name of variable, value=value-->
+        <!--  we can use index,type instead of name parameter-->
+        <!--  if the variable is a Object, then first we should include that bean object also in the xml and we will keep that value using "ref" attribute-->
+        <!--  "ref" attribute should be equal to the id of the bean of referenced object-->
+<!--        <constructor-arg name="name" value = "Avinash"> </constructor-arg>-->
+<!--        <constructor-arg name="lap" ref="laptop"> </constructor-arg>-->
+    </bean>
+
+    <!-- Laptop bean-->
+    <bean id="laptop" class="com.avinash.Springboot.Laptop">
+
+    </bean>
+
+    <!-- other attributes-->
+    <!-- Autowiring-->
+    <!-- let us essumne a situation-->
+</beans>

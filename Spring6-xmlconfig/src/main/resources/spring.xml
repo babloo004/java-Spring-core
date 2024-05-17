@@ -1,0 +1,86 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- the above code is standard...it is available in website-->
+
+    <!-- for creating a bean we must use <bean></bean> tag -->
+    <!-- lets create bean for Alien class -->
+    <!-- in bean we must give some attributes, id= class name  class="class location-->
+    <!-- the id will decide the class name, we should enter the id value as name in getBean method-->
+
+    <!-- Alien bean-->
+    <bean id="alien" class="com.avinash.Springboot.Alien" autowire="byType">
+        <!-- we will do dependency injection in this file only-->
+        <!-- we will use property attribute for field injection-->
+        <!-- we will use constructor-arg for constructor injection-->
+
+        <!-- property -->
+        <!-- ok lets do filed injection first by property attribute-->
+        <!--it will have two attribute, name and value-->
+        <!-- name refers to the variable name and value indicate its value-->
+        <!-- this property attribute class the setter and sets the value-->
+        <!-- to work with property attribute we need setters-->
+        <!--  if the variable is a Object, then first we should include that bean object also in the xml and we will keep that value using "ref" attribute-->
+        <!--  "ref" attribute should be equal to the id of the bean of referenced object-->
+        <property name="age" value="20"> </property>
+        <property name="name" value="Avinash"> </property>
+        <!-- constructor-arg -->
+        <!--  it is used for the constructor injection -->
+        <!--  it takes two parameters, name=name of variable, value=value-->
+        <!--  we can use index,type instead of name parameter-->
+        <!--  if the variable is a Object, then first we should include that bean object also in the xml and we will keep that value using "ref" attribute-->
+        <!--  "ref" attribute should be equal to the id of the bean of referenced object-->
+<!--        <constructor-arg name="name" value = "Avinash"> </constructor-arg>-->
+<!--        <constructor-arg name="lap" ref="laptop"> </constructor-arg>-->
+    </bean>
+
+    <!-- Laptop bean-->
+    <bean id="laptop" class="com.avinash.Springboot.Laptop">
+
+    </bean>
+
+    <!-- In the xml file, laptop bean is there only for the reference of Ailen object-->
+    <!-- but it can be used by anyother bean, to prevent this we will keep the laptop bean declaration inside the Alien bean declaration inside laptop property tag and remove the "ref attribute-->
+    <!-- Code will look like this-->
+    <!--    <bean id="alien" class="com.avinash.Springboot.Alien">                      -->
+    <!--        <property name="age" value="20"> </property>                            -->
+    <!--        <property name="laptop">                                                 -->
+    <!--            <bean id="laptop" class="com.avinash.Springboot.Laptop"> </bean>    -->
+    <!--        </property>                                                             -->
+    <!--    </bean>                                                                     -->
+
+    <!-- other attributes-->
+
+    <!-- autowire-->
+    <!-- let us assume a situation where Alien class is dependent on the Laptop object to run compile method-->
+    <!-- in that situations if we use "autowire" attribute, the Spring will automatically wire the Alien and Laptop-->
+    <!-- but the Laptop bean should also present in the xml file-->
+    <!-- we can autowire by two types 1.byTpe 2.byName-->
+
+    <!-- scope-->
+    <!-- actually by default all the beans are singleton by scope-->
+    <!-- Singleton means, how many times you call the getBean() method, only one object will be created-->
+    <!-- that object will be created before we are calling the getBean() method-->
+    <!-- another scope type is "prototype"-->
+    <!-- in this type of scope, multiple objects are created when getBean() is called multiple times-->
+    <!-- the object will be created when getBean() is called-->
+
+    <!-- primary-->
+    <!-- let's imagine a situation where Computer is an interface-->
+    <!-- Computer is having compile() method-->
+    <!-- there are two classes which implements Computer, they are Laptop and Desktop-->
+    <!-- we have provided Computer type variable in the Alien class, so we need either Laptop object/Desktop object-->
+    <!-- if both autowired is enabled byType and Laptop and Desktop beans are there in xml-->
+    <!-- Because of ambiguity we will get error-->
+    <!-- We must declare one of the class as Primary-->
+    <!-- its implementation will look like this, primary="true"-->
+
+    <!-- lazy-init="true"-->
+    <!-- As we discussed that the singleton objects are created before getBean() method is called-->
+    <!-- If we want to restrict that behaviour, we can use "lazy-init" attribute-->
+    <!-- because of this attribute, the object is created only when the getBean() method is called and its scope is still Singleton-->
+    <!-- Syntax looks like this lazy-init="true"-->
+
+
+</beans>
